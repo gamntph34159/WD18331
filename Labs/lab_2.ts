@@ -1,9 +1,17 @@
-import { productsType } from './types/Product'
-import { cartsType } from './types/Cart'
-import { UserType } from './types/User'
+type productsType = {
+    "id": number,
+    "title": string,
+    "description": string,
+    "price": number,
+    "discountPercentage": number,
+    "rating": number,
+    "stock":number,
+    "brand": string,
+    "category": string,
+    "thumbnail": string,
+    "images": string[],
+};
 
-function App() {
-  const [count, setCount] = useState(0)
 const products: productsType =  
     {
       "id": 1,
@@ -26,9 +34,30 @@ const products: productsType =
     }
 ;
 
-  }
+type productsInCart = {
+    "id": number,
+        "title": string,
+        "price": number,
+        "quantity":number,
+        "total": number,
+        "discountPercentage": number,
+        "discountedPrice": number,
+        "thumbnail": string,
+}
 
-  const carts: cartsType =
+type cartsType = 
+{
+    "id": number,
+    "products": productsInCart[]
+    ,
+    "total": number,
+    "discountedTotal": number,
+    "userId": number,
+    "totalProducts": number,
+    "totalQuantity": number
+  };
+
+const carts: cartsType =
     {
       "id": 1,
       "products": [
@@ -90,7 +119,71 @@ const products: productsType =
       "totalQuantity": 10
     };
 
- const users: UserType = 
+   type HairType = {
+        color: string
+        type: string
+      }
+   type CoordinatesType = {
+        lat: number
+        lng: number
+      }
+      type AddressType = {
+        address: string
+        city: string
+        coordinates: CoordinatesType
+        postalCode: string
+        state: string
+      }
+  type BankType = {
+        cardExpire: string
+        cardNumber: string
+        cardType: string
+        currency: string
+        iban: string
+      }
+   type CryptoType = {
+        coin: string
+        wallet: string
+        network: string
+      }
+    type CompanyType = {
+        address: AddressType
+        department: string
+        name: string
+        title: string
+      }
+     type UserType = {
+        id: number
+        firstName: string
+        lastName: string
+        maidenName: string
+        age: number
+        gender: string
+        email: string
+        phone: string
+        username: string
+        password: string
+        birthDate: string
+        image: string
+        bloodGroup: string
+        height: number
+        weight: number
+        eyeColor: string
+        hair: HairType
+        domain: string
+        ip: string
+        address: AddressType
+        macAddress: string
+        university: string
+        bank: BankType
+        company: CompanyType
+        ein: string
+        ssn: string
+        userAgent: string
+        crypto: CryptoType
+      }
+
+      const users: UserType = 
         {
             "id": 2,
             "firstName": "Sheldon",
@@ -157,22 +250,3 @@ const products: productsType =
               "network": "Ethereum (ERC20)"
             }
           };
-  return (
-    <>
-      <div>
-        <h2>{product.title}</h2>
-        <img src={product.thumbnail} alt={product.title} />
-        <h5>Gia san pham: {product.price}</h5>
-      </div>
-      <div className='card'>
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className='read-the-docs'>Click on the Vite and React logos to learn more</p>
-    </>
-  )
-}
-
-export default App
